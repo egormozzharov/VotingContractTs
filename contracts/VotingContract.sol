@@ -28,7 +28,7 @@ contract VotingContract {
         uint voteCount; 
     }
 
-    enum VotingState { Created, InProgress, Ended }    
+    enum VotingState { NotCreated, Created, InProgress, Ended }
 
     address payable public contractOwner;
     
@@ -42,7 +42,7 @@ contract VotingContract {
         require(msg.sender == contractOwner, "Only contractOwner can start and end the voting");
 
         Voting storage voting = votings[voteName];
-        voting.votingState = VotingState.InProgress;
+        voting.votingState = VotingState.Created;
         voting.votingBalance = 0;
         voting.withDrawOccured = false;
         voting.startDate = block.timestamp;
